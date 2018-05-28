@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+
+  server:
+    container_name: server
+    build: ./server
+    image: visual_text_server:1
+    volumes:
+      - './server:/visual_text/server'
+      - '/server/node_modules'
+    ports:
+      - '3000:3000' # Host:Container
+    

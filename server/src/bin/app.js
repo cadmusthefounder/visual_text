@@ -7,17 +7,18 @@ const boom = require('boom');
 const app = express();
 
 // Setup CORS.
-// app.use(cors({  
-//   origin: ["http://localhost:3000"],
-//   methods: ["GET", "POST"],
-//   allowedHeaders: ["Content-Type", "Authorization"]
-// }));
-app.use(cors());
+app.use(cors({  
+  origin: ["http://localhost"],
+  methods: ["GET", "POST"],
+}));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Setup routes
-const questions = require('../routes/questions')();
+// Setup database.
+const db = require('../db/database');
+
+// Setup routes.
+const questions = require('../routes/questions')(db);
 app.use('/questions', questions);
 
 // Catch 404 and forward to error handler.

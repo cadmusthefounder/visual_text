@@ -1,0 +1,1 @@
+CREATE DATABASE visual_text;

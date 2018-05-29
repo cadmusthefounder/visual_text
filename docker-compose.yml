@@ -8,14 +8,9 @@ services:
     image: visual_text_server:1
     volumes:
       - './server:/visual_text/server'
-      - '/server/node_modules'
-    ports:
-      - '3000:3000' # Host:Container
-    env_file:
-      - local.env
+      - '/visual_text/server/node_modules'
     depends_on:
       - server_db
-    command: ["./wait-for-it.sh", "server_db:5432", "--", "npm", "start"]
     networks:
       - server_network
     
@@ -25,10 +20,6 @@ services:
     volumes:
       - './server/src/db:/docker-entrypoint-initdb.d/'
       - './server/src/db:/visual_text/server_db'
-    ports:
-      - '5432:5432' # Host:Container
-    env_file:
-      - local.env
     networks:
       - server_network
 

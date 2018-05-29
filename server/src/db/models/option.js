@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   option.belongsTo = (models) => {
-    option.belongsTo(models.question, { onDelete: 'CASCADE' });
+    option.belongsTo(models.question);
   }
   return option;
 }

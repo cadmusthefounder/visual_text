@@ -3,7 +3,8 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize(process.env.POSTGRESQL_DATABASE, process.env.POSTGRESQL_USER, process.env.POSTGRESQL_PASSWORD, {
   host: process.env.POSTGRESQL_HOST,
-  dialect: 'postgres'
+  dialect: 'postgres',
+  operatorsAliases: false
 });
 
 sequelize
@@ -35,8 +36,8 @@ Object.keys(db).forEach(modelName => {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
-// db.sequelize.sync();
 
-db.sequelize.sync({ force: true });
+db.sequelize.sync();
+// db.sequelize.sync({ force: true });
 
 module.exports = db;

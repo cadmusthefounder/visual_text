@@ -1,5 +1,6 @@
 FROM node:10.2.1
 
+RUN mkdir -p /visual_text/server
 WORKDIR /visual_text/server
 
 # Install app dependencies.

@@ -3,23 +3,21 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const boom = require('boom');
+const healthcheck = require('express-healthcheck');
 
 const app = express();
 
-// Setup CORS.
-app.use(cors({  
-  origin: ["http://localhost"],
-  methods: ["GET", "POST"],
-}));
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Setup database.
-const db = require('../db/database');
-
 // Setup routes.
-const questions = require('../routes/questions')(db);
+const topics = require('../routes/topics');
+const questions = require('../routes/questions');
+
+app.use('/topics', topics);
 app.use('/questions', questions);
+app.use('/healthcheck', healthcheck());
 
 // Catch 404 and forward to error handler.
 app.use((req, res, next) => {

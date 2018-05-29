@@ -14,8 +14,9 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   question.associate = (models) => {
-    question.hasMany(models.option, { onDelete: 'CASCADE' });
+    question.hasMany(models.option, { onDelete: 'cascade', hooks: true  });
     question.belongsTo(models.option, { as: 'correct_answer', constraints: false });
+    question.belongsTo(models.topic);
   }
   return question;
 }
